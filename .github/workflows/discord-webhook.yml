@@ -1,0 +1,16 @@
+name: Notify Discord on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  discordNotification:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send Discord Notification
+      uses: Ilshidur/action-discord@master
+      with:
+        args: "New VAICOM Pro release: [${{ github.event.release.name }}](${{ github.event.release.html_url }})"
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
